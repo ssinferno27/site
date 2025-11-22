@@ -144,11 +144,18 @@
             font-size: 1.1rem;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(79, 111, 173, 0.3);
+            width: 200px;
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(79, 111, 173, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .divider {
@@ -179,6 +186,38 @@
             font-size: 0.85rem;
             color: var(--gray);
             margin-top: 0.25rem;
+        }
+
+        /* Loading Spinner Styles - UPDATED FOR CENTERING */
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(79, 111, 173, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 1rem auto;
+        }
+
+        .loading-text {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         @media (max-width: 576px) {
@@ -338,8 +377,12 @@
                 <div class="divider"></div>
                 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-submit">Submit Sales Log</button>
-                    <p class="mt-2 text-muted">or press <strong>Enter</strong> to submit</p>
+                    <button type="submit" class="btn btn-submit" id="submitButton">Submit Sales Log</button>
+                    <div class="loading-container" id="loadingContainer">
+                        <div class="spinner"></div>
+                        <div class="loading-text">Submitting...</div>
+                    </div>
+                    <p class="mt-2 text-muted" id="submitHint">or press <strong>Enter</strong> to submit</p>
                 </div>
             </form>
         </div>
@@ -403,6 +446,7 @@
             let currentCategory = "";
             let currentItemName = "";
             let currentVariation = "";
+            let isSubmitting = false;
 
             // Category change handler
             $("#Category").change(function () {
@@ -498,28 +542,41 @@
                 }
             });
 
-            // Form submission handler
+            // Form submission handler - SIMPLIFIED to prevent double submission but allow normal form submission
             $("form").submit(function (e) {
+                // Prevent double submission
+                if (isSubmitting) {
+                    e.preventDefault();
+                    return false;
+                }
+                
                 // Validate required fields
                 if (!$("#Category").val()) {
                     alert("Please select a category");
                     e.preventDefault();
-                    return;
+                    return false;
                 }
                 
                 if ($("#ItemName").is(":visible") && !$("#ItemName").val()) {
                     alert("Please select an item name");
                     e.preventDefault();
-                    return;
+                    return false;
                 }
                 
                 if ($("#Variation").is(":visible") && !$("#Variation").val()) {
                     alert("Please select a variation");
                     e.preventDefault();
-                    return;
+                    return false;
                 }
                 
-                // You can add additional validation here if needed
+                // If validation passes, show loading state but DON'T prevent default form submission
+                isSubmitting = true;
+                $("#submitButton").hide();
+                $("#loadingContainer").show();
+                $("#submitHint").hide();
+                
+                // The form will continue with its normal submission and redirect to Google Apps Script
+                // This is what makes the data populate correctly in your spreadsheet
             });
         });
     </script>
