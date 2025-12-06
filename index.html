@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewel Box - Fine Jewelry, Watches & Expert Repairs</title>
+    <link rel="icon" href="https://www.polisheddiamonds.co.nz/wp-content/uploads/2023/02/lab-grown-diamond.png"
+        type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0a1a2f;
+            --gold: #d4af37;
+            --light-grey: #f8f9fa;
+            --white: #ffffff;
+            --dark-gold: #b8941f;
+            --text-dark: #333333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+            padding-top: 100px; /* For fixed header */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        section {
+            padding: 5rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--navy);
+            padding: 0.9rem 2rem;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            background-color: var(--dark-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--gold);
+            color: var(--navy);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--navy);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--white);
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .contact-item i {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        nav li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 26, 47, 0.85), rgba(10, 26, 47, 0.9)), url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 8rem 1.5rem;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-badge {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.2rem 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 200px;
+            transition: var(--transition);
+        }
+
+        .contact-badge:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .contact-badge i {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-badge .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-badge .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* Collections Section */
+        .collections {
+            background-color: var(--light-grey);
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .collection-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.8rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--navy);
+        }
+
+        .card-content p {
+            color: #666;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Watches Section */
+        .watches-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .watches-text {
+            flex: 1;
+        }
+
+        .watches-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .watches-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .brand-highlight {
+            background-color: var(--gold);
+            color: var(--navy);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        /* Repair Services */
+        .repair-services {
+            background-color: var(--light-grey);
+        }
+
+        .services-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+        }
+
+        .service-card h3 i {
+            margin-right: 10px;
+            color: var(--gold);
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .service-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        .contact-section h2 {
+            color: var(--white);
+        }
+
+        .contact-section h2:after {
+            background-color: var(--gold);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item-large {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .contact-item-large i {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-top: 0.3rem;
+        }
+
+        .contact-details h3 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .business-hours {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hours-list {
+            list-style: none;
+        }
+
+        .hours-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a1520;
+            color: var(--white);
+            padding: 2.5rem 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .footer-contact-item i {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .collections-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .watches-content {
+                flex-direction: column;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-header {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                position: fixed;
+                top: 100px;
+                left: 0;
+                width: 100%;
+                background-color: var(--navy);
+                padding: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                margin-top: 0;
+            }
+            
+            nav li {
+                margin: 0 0 1.2rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-contact {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .collections-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .footer-contact {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 80px;
+            }
+            
+            section {
+                padding: 3.5rem 1rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                padding: 4rem 1rem;
+                min-height: 60vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .contact-badge {
+                min-width: 100%;
+            }
+            
+            .service-card {
+                padding: 1.8rem;
+            }
+            
+            .footer-logo {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="header-container">
+            <div>
+                <a href="#" class="logo">Jewel<span>Box</span></a>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#collections">Jewelry</a></li>
+                        <li><a href="#watches">Watches</a></li>
+                        <li><a href="#repairs">Repair Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="contact-header">
+                <div class="contact-item">
+                    <i>📞</i>
+                    <span>(678) 876-7464</span>
+                </div>
+                <div class="contact-item">
+                    <i>✉️</i>
+                    <span>ritejewelers@gmail.com</span>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Discover Exquisite Jewelry & Timepieces</h1>
+            <p>Jewel Box offers a curated selection of fine jewelry, watches, and expert repair services. Visit our kiosk to explore our collection or consult with our specialists.</p>
+            
+            <div class="hero-contact">
+                <div class="contact-badge">
+                    <i>📞</i>
+                    <div class="label">Call Us Today</div>
+                    <div class="value">(678) 876-7464</div>
+                </div>
+                <div class="contact-badge">
+                    <i>✉️</i>
+                    <div class="label">Email Inquiries</div>
+                    <div class="value">ritejewelers@gmail.com</div>
+                </div>
+                <div class="contact-badge">
+                    <i>🕒</i>
+                    <div class="label">Business Hours</div>
+                    <div class="value">Mon-Sat: 10am-7pm</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jewelry Collections Section -->
+    <section class="collections" id="collections">
+        <div class="container">
+            <h2>Our Jewelry Collection</h2>
+            <div class="collections-grid">
+                <div class="collection-card">
+                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Fine Gold Jewelry" class="card-img">
+                    <div class="card-content">
+                        <h3>Fine Gold</h3>
+                        <p>We offer a beautiful selection of 10K & 14K Gold necklaces, bracelets, and rings. Each piece is crafted for lasting beauty and value.</p>
+                    </div>
+                </div>
+                <div class="collection-card">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Diamonds & Moissanite" class="card-img">
+                    <div class="card-content">
+                        <h3>Diamonds & Moissanite</h3>
+                        <p>Discover brilliant diamonds and stunning moissanite stones in various settings. Our collection includes pieces for every special occasion.</p>
+                    </div>
+                </div>
+                <div class="collection-card">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Silver & Steel" class="card-img">
+                    <div class="card-content">
+                        <h3>Silver, Steel & Tungsten</h3>
+                        <p>Browse our collection of elegant 925 Sterling Silver and durable Stainless Steel/Tungsten pieces. Perfect for everyday sophistication and style.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Watches Section -->
+    <section class="watches" id="watches">
+        <div class="container">
+            <h2>Premium Timepieces</h2>
+            <div class="watches-content">
+                <div class="watches-text">
+                    <p>Our watch collection features the bold designs and precision engineering of Invicta timepieces, along with a variety of other leading watch brands. From statement-making diver watches to elegant dress watches, we have timepieces for every style and occasion.</p>
+                    
+                    <div class="brand-highlight">Featured Brand: Invicta</div>
+                    
+                    <p>Visit our kiosk to explore our full selection of premium watches. Our knowledgeable staff can help you find the perfect timepiece to match your style.</p>
+                </div>
+                <div class="watches-image">
+                    <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Watches">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Repair Services Section -->
+    <section class="repair-services" id="repairs">
+        <div class="container">
+            <h2>Expert Repair Services</h2>
+            <p class="services-intro">Our experienced jewelers provide professional repair services for your treasured jewelry and watches. Bring your items to our kiosk for assessment and repair.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3><i>💎</i> Jewelry Repairs</h3>
+                    <ul class="service-list">
+                        <li>Ring resizing</li>
+                        <li>Prong re-tipping</li>
+                        <li>Soldering</li>
+                        <li>Stone tightening/replacement</li>
+                        <li>Clasp replacement</li>
+                        <li>Polishing & restoration</li>
+                        <li>Clasp/Earring back Replacement</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3><i>⌚</i> Watch Repairs</h3>
+                    <ul class="service-list">
+                        <li>Battery replacements</li>
+                        <li>Link sizing (adding/removing)</li>
+                        <li>Band replacements</li>
+                        <li>Crown and Stem Replacement</li>
+                        <li>Crystal replacement</li>
+                        <li>Gasket Replacement</li>
+                        <li>Movement Replacement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Visit Our Kiosk</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item-large">
+                        <i>📍</i>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p><strong>6700 Douglas Blvd <br>Douglasville, GA, 30135</strong><br>Located next to Rue21</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item-large">
+                        <i>📞</i>
+                        <div class="contact-details">
+                            <h3>Phone Number</h3>
+                            <p><strong>(678) 876-7464</strong><br>Call us to inquire about our collection or schedule a repair consultation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item-large">
+                        <i>✉️</i>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p><strong>ritejewelers@gmail.com</strong><br>Send us questions about our products or services</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="business-hours">
+                    <h3>Business Hours</h3>
+                    <ul class="hours-list">
+                        <li><span>Monday - Friday</span><span>11:00 AM - 8:00 PM</span></li>
+                        <li><span>Saturday</span><span>11:00 AM - 8:30 PM</span></li>
+                        <li><span>Sunday</span><span>12:00 PM - 6:00 PM</span></li>
+                    </ul>
+                    <p style="margin-top: 1.5rem; font-style: italic; color: rgba(255,255,255,0.8);">Extended holiday hours may apply. Please call ahead for special appointments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Jewel Box</div>
+            <p class="footer-tagline">Your trusted source for fine jewelry, premium watches, and expert repair services. Visit our kiosk to experience our collection firsthand.</p>
+            
+            <div class="footer-contact">
+                <div class="footer-contact-item">
+                    <i>📞</i>
+                    <span>(678) 876-7464</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i>✉️</i>
+                    <span>ritejewelers@gmail.com</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i>📍</i>
+                    <span>6700 Douglas Blvd, Douglasville</span>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Jewel Box. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Fine jewelry, watches, and repair services available at our kiosk location.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // Close mobile menu when clicking a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.textContent = '☰';
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
